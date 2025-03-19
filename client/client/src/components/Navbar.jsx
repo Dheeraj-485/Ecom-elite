@@ -10,7 +10,10 @@ const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [cartCount, setCartCount] = useState(0);
   const [isOpen, setIsOpen] = useState(false); // For mobile menu
+  const [searchQuery, setSearchQuery] = useState("");
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const user = useSelector((state) => state.auth.user);
 
   // Check if user is logged in
@@ -22,6 +25,13 @@ const Navbar = () => {
       setIsLoggedIn(false);
     }
   }, [user]);
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/search/?title=${encodeURIComponent(searchQuery)}`);
+    }
+  };
 
   // Fetch Cart Count
   useEffect(() => {
@@ -38,7 +48,6 @@ const Navbar = () => {
     if (isLoggedIn) fetchCarts();
   }, [isLoggedIn]);
 
-  const navigate = useNavigate();
   // Logout Function
   const handleLogout = () => {
     localStorage.removeItem("token");
@@ -61,6 +70,23 @@ const Navbar = () => {
         >
           {isOpen ? <FaTimes /> : <FaBars />}
         </button>
+        <div className="hidden md:flex ">
+          <form onClick={handleSearch}>
+            <input
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              type="text"
+              className="border focus:outline-none p-1.5 m-1 w-[20rem] rounded-lg text-white"
+              placeholder="Search a Product "
+            />
+            <button
+              className="border text-center p-2 m-2 bg-blue-50 rounded-lg
+            "
+            >
+              🔍
+            </button>
+          </form>
+        </div>
 
         {/* Desktop Menu */}
         <ul className="hidden md:flex space-x-6">
@@ -128,84 +154,104 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <ul className="md:hidden flex flex-col bg-gray-800 p-4 space-y-4">
-          <li>
-            <Link to="/" className="block" onClick={() => setIsOpen(false)}>
-              Home
-            </Link>
-          </li>
-          {isLoggedIn ? (
-            <>
-              <li>
-                <Link
-                  to="/cart"
-                  className="flex items-center space-x-1"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <FaShoppingCart />
-                  <span>Cart</span>
-                  {cartCount > 0 && (
-                    <span className="bg-red-500 text-white text-xs rounded-full px-2 ml-2">
-                      {cartCount}
-                    </span>
-                  )}
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/orders"
-                  className="flex items-center space-x-1"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <FaBox />
-                  <span>Orders</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/profile"
-                  className="flex items-center space-x-1"
-                  onClick={() => setIsOpen(false)}
-                >
-                  <FaUser />
-                  <span>Profile</span>
-                </Link>
-              </li>
-              <li>
-                <button
-                  onClick={() => {
-                    handleLogout();
-                    setIsOpen(false);
-                  }}
-                  className="block"
-                >
-                  Logout
-                </button>
-              </li>
-            </>
-          ) : (
-            <>
-              <li>
-                <Link
-                  to="/login"
-                  className="block"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Login
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/signup"
-                  className="block"
-                  onClick={() => setIsOpen(false)}
-                >
-                  Signup
-                </Link>
-              </li>
-            </>
-          )}
-        </ul>
+        <>
+          <div className=" md:hidden flex flex-row p-2 m-2   ">
+            <form onClick={handleSearch}>
+              <input
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                type="text"
+                className="border focus:outline-none p-1.5 m-1 w-[15rem] rounded-lg text-white"
+                placeholder="Search a Product "
+              />
+              <button
+                className="border text-center p-2 m-2 bg-blue-50 rounded-lg
+            "
+              >
+                🔍
+              </button>
+            </form>
+          </div>
+
+          <ul className="md:hidden flex flex-col bg-gray-800 p-4 space-y-4">
+            <li>
+              <Link to="/" className="block" onClick={() => setIsOpen(false)}>
+                Home
+              </Link>
+            </li>
+            {isLoggedIn ? (
+              <>
+                <li>
+                  <Link
+                    to="/cart"
+                    className="flex items-center space-x-1"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <FaShoppingCart />
+                    <span>Cart</span>
+                    {cartCount > 0 && (
+                      <span className="bg-red-500 text-white text-xs rounded-full px-2 ml-2">
+                        {cartCount}
+                      </span>
+                    )}
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/orders"
+                    className="flex items-center space-x-1"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <FaBox />
+                    <span>Orders</span>
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/profile"
+                    className="flex items-center space-x-1"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    <FaUser />
+                    <span>Profile</span>
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    onClick={() => {
+                      handleLogout();
+                      setIsOpen(false);
+                    }}
+                    className="block"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </>
+            ) : (
+              <>
+                <li>
+                  <Link
+                    to="/login"
+                    className="block"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Login
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    to="/signup"
+                    className="block"
+                    onClick={() => setIsOpen(false)}
+                  >
+                    Signup
+                  </Link>
+                </li>
+              </>
+            )}
+          </ul>
+        </>
       )}
     </nav>
   );

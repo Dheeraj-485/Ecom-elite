@@ -13,6 +13,7 @@ import AdminOrders from "./pages/AdminOrders";
 import CreateProduct from "./pages/CreateProduct";
 import UserProfile from "./pages/UserProfile";
 import OrderSuccess from "./pages/OrderSuccess";
+import SearchResult from "./pages/SearchResult";
 
 const App = () => {
   return (
@@ -29,6 +30,7 @@ const App = () => {
         {/* Product  */}
         <Route path="/products/:id" element={<ProductDetails />} />
         <Route path="/cart" element={<Cart />} />
+        <Route path="/search" element={<SearchResult />} />
 
         <Route path="/orders" element={<OrdersPage />} />
         {/* <Route path="/orders/:id" element={<OrdersPage />} /> */}

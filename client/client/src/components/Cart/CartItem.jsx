@@ -14,25 +14,25 @@ const CartItem = ({ item }) => {
       />
       <div className="ml-4">
         <h3 className="text-lg font-semibold">{item.product.title}</h3>
-        <p className="text-gray-300">{item.product.price.toFixed(2)}</p>
+        <p className="text-gray-500">{item.product.price.toFixed(2)}</p>
       </div>
       <div className="ml-auto flex items-center">
         <button
           onClick={() =>
-            dispatch(updateCart({ productId: item.product._id, quantity: 1 }))
+            dispatch(updateCart({ productId: item.product._id, quantity: -1 }))
           }
           className="bg-gray-200 px-3 py-1 rounded-l"
         >
-          +
+          -
         </button>
         <span className="px-4">{item.quantity}</span>
         <button
           onClick={() =>
-            dispatch(updateCart({ productId: item.product._id, quantity: -1 }))
+            dispatch(updateCart({ productId: item.product._id, quantity: 1 }))
           }
           className="bg-gray-200 px-3 py-1 rounded-r"
         >
-          -
+          +
         </button>
 
         <button

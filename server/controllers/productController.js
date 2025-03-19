@@ -221,3 +221,27 @@ exports.addReview = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+//For searching
+exports.searchProduct = async (req, res) => {
+  try {
+    const { title } = req.query;
+    const query = title ? { title: { $regex: title, $options: "i" } } : null;
+    if (!query) {
+      return res.status(400).json({ message: "Please provide an query" });
+    }
+
+    const product = await Products.find(query);
+
+    if (!product || (Array.isArray(product) && product.length === 0)) {
+      return res.status(404).json({ message: "Item not found" });
+    }
+
+    res.status(200).json({
+      message: "Item found",
+      items: product, // Return as an array if single item
+    });
+  } catch (error) {
+    return res.status(500).json({ message: "Error searching-Server Error" });
+  }
+};
