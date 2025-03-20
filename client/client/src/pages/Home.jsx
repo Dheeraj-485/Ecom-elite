@@ -1,36 +1,3 @@
-// import React, { useEffect } from "react";
-// import { useDispatch, useSelector } from "react-redux";
-// import { ProductCard } from "../components/ProductCard";
-// import { fetchAllProduct } from "../redux/productSlice";
-// import CreateProduct from "./CreateProduct";
-// import { Link } from "react-router-dom";
-
-// const Home = () => {
-//   const { product } = useSelector((state) => state.products);
-//   console.log(product);
-//   const dispatch = useDispatch();
-
-//   useEffect(() => {
-//     dispatch(fetchAllProduct());
-//   }, [dispatch]);
-//   return (
-//     <>
-//       <Link to="/create-product">
-//         <h2 className="border p-4 m-4 bg-green-400 rounded-md shadow w-[12rem]  ">
-//           Create New product +
-//         </h2>
-//       </Link>
-
-//       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4">
-//         {product &&
-//           product.map((item) => <ProductCard key={item._id} {...item} />)}
-//       </div>
-//     </>
-//   );
-// };
-
-// export default Home;
-
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 // import { fetchProducts } from ""; // Assuming you have this action
@@ -162,97 +129,6 @@ const Home = () => {
 
   return (
     <div className="  w-full  flex-col items-center">
-      {/* <button
-        onClick={() => setIsSidebarVisible(!isSidebarVisible)}
-        className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition duration-300 m-4 w-15 h-15"
-      >
-        {isSidebarVisible ? "-" : "+"}
-      </button> */}
-      {/* {isSidebarVisible && (
-        <div className="w-1/4 p-4">
-          <h2 className="text-xl font-semibold mb-4">Filters</h2>
-          <div className="mb-4">
-            <h3 className="font-medium">Sort By</h3>
-            <select
-              className="border border-gray-300 p-2 rounded-lg w-full"
-              onChange={handleSortChange}
-            >
-              <option value="">Select</option>
-              <option value="lowToHigh">Price: Low to High</option>
-              <option value="highToLow">Price: High to Low</option>
-            </select>
-          </div>
-          <div className="mb-4">
-            <h3 className="font-medium">Brand</h3>
-            {["Brand1", "Brand2", "Brand3"].map((brand) => (
-              <div key={brand}>
-                <input
-                  type="checkbox"
-                  id={brand}
-                  value={brand}
-                  onChange={() => handleBrandChange(brand)}
-                />
-                <label htmlFor={brand} className="ml-2">
-                  {brand}
-                </label>
-              </div>
-            ))}
-          </div>
-          <div className="mb-4">
-            <h3 className="font-medium">Category</h3>
-            {["Category1", "Category2", "Category3"].map((category) => (
-              <div key={category}>
-                <input
-                  type="checkbox"
-                  id={category}
-                  value={category}
-                  onChange={() => handleCategoryChange(category)}
-                />
-                <label htmlFor={category} className="ml-2">
-                  {category}
-                </label>
-              </div>
-            ))}
-          </div>
-        </div>
-      )} */}
-
-      {/* Hero Caraousal  */}
-
-      {/* <Carousel
-        showThumbs={false}
-        autoPlay
-        infiniteLoop
-        showArrows={true}
-        interval={4000}
-        className="w-full max-w-5xl mx-auto"
-      >
-        <div className="w-full h-[300px] sm:h-[400px] md:h-[500px] flex items-center justify-center">
-          <img
-            className="w-full h-full object-cover"
-            src="https://pixabay.com/photos/laptop-computer-notebook-2665794/"
-            alt="Banner 1"
-          />
-          <p className="legend">Best Deals Here</p>
-        </div>
-        <div className="w-full h-[300px] sm:h-[400px] md:h-[500px] flex items-center justify-center">
-          <img
-            className="w-full h-full object-cover"
-            src={Image2}
-            alt="Banner 2"
-          />
-          <p className="legend">Amazing Discount</p>
-        </div>
-        <div className="w-full h-[300px] sm:h-[400px] md:h-[500px] flex items-center justify-center">
-          <img
-            className="w-full h-full object-cover"
-            src={Image3}
-            alt="Banner 3"
-          />
-          <p className="legend">Shop with Confidence</p>
-        </div>
-      </Carousel> */}
-
       {/* Create Product Button  */}
 
       <div className="p-4">
@@ -290,7 +166,7 @@ const Home = () => {
 
       {/* Testimonial Section  */}
 
-      <div className="overflow-hidden py-10 bg-gray-100">
+      <div className="py-10 bg-gray-100">
         <motion.div
           className="flex space-x-6"
           animate={{ x: ["0%", "-100%"] }}
