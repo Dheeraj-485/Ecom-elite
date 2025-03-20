@@ -99,35 +99,34 @@ const UserProfile = () => {
           </div>
         )}
 
-        {}
+        {isChangingPassword && (
+          <div className="flex">
+            <form onSubmit={handleChangePassword}>
+              <input
+                type="password"
+                value={updatePassword}
+                onChange={(e) => setUpdatePassword(e.target.value)}
+                placeholder="Enter Update Password"
+                className="border  p-2 m-2 rounded-xl "
+              />
+              <button
+                type="submit"
+                className="bg-green-400 text-white rounded-xl p-2 m-1"
+              >
+                {isSubmitting ? "Updating..." : "Update "}
+              </button>
+              <button
+                className="bg-red-500 text-white  rounded-xl p-2 m-1"
+                type="button"
+                onClick={() => setIsChangingPassword(false)}
+              >
+                Cancel
+              </button>
+            </form>
+          </div>
+        )}
       </div>
       {user?.role === "admin" && <AdminOrders />}
-      {isChangingPassword && (
-        <div className="flex">
-          <form onSubmit={handleChangePassword}>
-            <input
-              type="password"
-              value={updatePassword}
-              onChange={(e) => setUpdatePassword(e.target.value)}
-              placeholder="Enter Update Password"
-              className="border  p-2 m-2 rounded-xl "
-            />
-            <button
-              type="submit"
-              className="bg-green-400 text-white rounded-xl p-2 m-1"
-            >
-              {isSubmitting ? "Updating..." : "Update "}
-            </button>
-            <button
-              className="bg-red-500 text-white  rounded-xl p-2 m-1"
-              type="button"
-              onClick={() => setIsChangingPassword(false)}
-            >
-              Cancel
-            </button>
-          </form>
-        </div>
-      )}
     </>
   );
 };
