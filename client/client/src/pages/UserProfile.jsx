@@ -101,7 +101,7 @@ const UserProfile = () => {
 
         {}
       </div>
-      {/* {user?.role === "admin" && <AdminOrders />} */}
+      {user?.role === "admin" && <AdminOrders />}
       {isChangingPassword && (
         <div className="flex">
           <form onSubmit={handleChangePassword}>
