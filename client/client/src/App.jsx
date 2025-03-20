@@ -14,11 +14,22 @@ import CreateProduct from "./pages/CreateProduct";
 import UserProfile from "./pages/UserProfile";
 import OrderSuccess from "./pages/OrderSuccess";
 import SearchResult from "./pages/SearchResult";
+import Footer from "./components/Footer";
+
+const Layout = ({ children }) => {
+  return (
+    <div className="flex flex-col min-h-screen">
+      <Navbar />
+      <div className=" flex-grow">{children}</div>
+      <Footer />
+    </div>
+  );
+};
 
 const App = () => {
   return (
-    <>
-      <Navbar />
+    <Layout>
+      {/* <Navbar /> */}
 
       <Routes>
         <Route path="/" element={<Home />} />
@@ -41,7 +52,8 @@ const App = () => {
         <Route path="/admin/orders" element={<AdminOrders />} />
         <Route path="/create-product" element={<CreateProduct />} />
       </Routes>
-    </>
+      {/* <Footer /> */}
+    </Layout>
   );
 };
 

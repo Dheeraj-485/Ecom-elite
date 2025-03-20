@@ -50,52 +50,212 @@ const Home = () => {
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
   };
-
   const testimonials = [
     {
       id: 1,
-      name: "John Doe",
-      role: "Software Engineer",
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
+      name: "Alice Johnson",
+      role: "Tech Enthusiast",
+      image: "https://randomuser.me/api/portraits/women/45.jpg",
       review:
-        "React.js is an amazing library for building scalable applications!",
+        "This laptop exceeded my expectations! Lightning-fast performance and a stunning display.",
     },
     {
       id: 2,
-      name: "Sarah Smith",
-      role: "Product Manager",
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
-      review: "Tailwind CSS makes styling so much faster and easier!",
+      name: "Michael Smith",
+      role: "Software Developer",
+      image: "https://randomuser.me/api/portraits/men/50.jpg",
+      review:
+        "Absolutely love the new smartphone! The battery lasts all day, and the camera quality is unreal.",
     },
     {
       id: 3,
-      name: "Michael Brown",
-      role: "Full Stack Developer",
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
-      review: "MERN stack is my go-to for modern web development.",
+      name: "Jessica Brown",
+      role: "Graphic Designer",
+      image: "https://randomuser.me/api/portraits/women/35.jpg",
+      review:
+        "The color accuracy on this laptop is perfect for my design work. Highly recommend!",
     },
     {
       id: 4,
-      name: "Emma Johnson",
-      role: "UI/UX Designer",
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
-      review: "Designing components with Tailwind CSS is a game-changer.",
+      name: "Daniel White",
+      role: "Gamer",
+      image: "https://randomuser.me/api/portraits/men/44.jpg",
+      review:
+        "This gaming laptop handles everything I throw at it. Super smooth gameplay!",
     },
     {
       id: 5,
+      name: "Sophia Miller",
+      role: "Photographer",
+      image: "https://randomuser.me/api/portraits/women/40.jpg",
+      review:
+        "The camera on this phone is a game changer! Professional-quality shots with ease.",
+    },
+    {
+      id: 6,
       name: "David Wilson",
       role: "Backend Engineer",
       image: "https://randomuser.me/api/portraits/men/32.jpg",
       review: "Node.js and Express.js are the backbone of our scalable APIs.",
     },
     {
-      id: 6,
-      name: "Sophia Lee",
-      role: "Frontend Developer",
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
-      review: "React Hooks make state management so much cleaner and easier!",
+      id: 7,
+      name: "Emma Davis",
+      role: "Student",
+      image: "https://randomuser.me/api/portraits/women/38.jpg",
+      review:
+        "This budget laptop is perfect for my studies. Fast and lightweight!",
+    },
+    {
+      id: 8,
+      name: "James Anderson",
+      role: "Entrepreneur",
+      image: "https://randomuser.me/api/portraits/men/55.jpg",
+      review:
+        "I run my business from this smartphone—smooth, powerful, and incredibly reliable!",
+    },
+    {
+      id: 9,
+      name: "Olivia Carter",
+      role: "Freelancer",
+      image: "https://randomuser.me/api/portraits/women/46.jpg",
+      review:
+        "The battery life on this laptop is insane! I can work all day without worrying about charging.",
+    },
+    {
+      id: 10,
+      name: "William Martin",
+      role: "Music Producer",
+      image: "https://randomuser.me/api/portraits/men/52.jpg",
+      review: "Amazing sound quality from this phone—perfect for music lovers!",
+    },
+    {
+      id: 11,
+      name: "Isabella Thompson",
+      role: "Marketing Manager",
+      image: "https://randomuser.me/api/portraits/women/34.jpg",
+      review:
+        "This laptop is perfect for multitasking! I can run multiple apps without any lag.",
+    },
+    {
+      id: 12,
+      name: "Ethan Roberts",
+      role: "IT Consultant",
+      image: "https://randomuser.me/api/portraits/men/48.jpg",
+      review:
+        "Security features on this phone are top-notch. I feel safe using it for work.",
+    },
+    {
+      id: 13,
+      name: "Charlotte Williams",
+      role: "Content Creator",
+      image: "https://randomuser.me/api/portraits/women/28.jpg",
+      review:
+        "Editing videos on this laptop is a breeze! It handles 4K footage effortlessly.",
+    },
+    {
+      id: 14,
+      name: "Benjamin Scott",
+      role: "Tech Reviewer",
+      image: "https://randomuser.me/api/portraits/men/37.jpg",
+      review:
+        "One of the best laptops I've tested this year. Great value for money!",
+    },
+    {
+      id: 15,
+      name: "Mia Lewis",
+      role: "Social Media Manager",
+      image: "https://randomuser.me/api/portraits/women/42.jpg",
+      review:
+        "This phone keeps me connected 24/7. The social media experience is seamless!",
+    },
+    {
+      id: 16,
+      name: "Noah Adams",
+      role: "College Student",
+      image: "https://randomuser.me/api/portraits/men/39.jpg",
+      review:
+        "Fast, durable, and affordable—this laptop is perfect for students like me!",
+    },
+    {
+      id: 17,
+      name: "Liam Garcia",
+      role: "Photographer",
+      image: "https://randomuser.me/api/portraits/men/53.jpg",
+      review:
+        "I’m amazed by the camera on this phone. It captures incredible details!",
+    },
+    {
+      id: 18,
+      name: "Ava Nelson",
+      role: "Digital Artist",
+      image: "https://randomuser.me/api/portraits/women/29.jpg",
+      review:
+        "The touchscreen on this laptop is super responsive. Love using it for my artwork!",
+    },
+    {
+      id: 19,
+      name: "Ethan Baker",
+      role: "Business Owner",
+      image: "https://randomuser.me/api/portraits/men/41.jpg",
+      review:
+        "This phone has become my office on the go. Handles everything smoothly.",
+    },
+    {
+      id: 20,
+      name: "Harper Evans",
+      role: "Fitness Coach",
+      image: "https://randomuser.me/api/portraits/women/33.jpg",
+      review:
+        "Great fitness tracking features on this phone. Keeps me motivated every day!",
     },
   ];
+
+  // const testimonials = [
+  //   {
+  //     id: 1,
+  //     name: "John Doe",
+  //     role: "Software Engineer",
+  //     image: "https://randomuser.me/api/portraits/men/32.jpg",
+  //     review:
+  //       "React.js is an amazing library for building scalable applications!",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Sarah Smith",
+  //     role: "Product Manager",
+  //     image: "https://randomuser.me/api/portraits/men/32.jpg",
+  //     review: "Tailwind CSS makes styling so much faster and easier!",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Michael Brown",
+  //     role: "Full Stack Developer",
+  //     image: "https://randomuser.me/api/portraits/men/32.jpg",
+  //     review: "MERN stack is my go-to for modern web development.",
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Emma Johnson",
+  //     role: "UI/UX Designer",
+  //     image: "https://randomuser.me/api/portraits/men/32.jpg",
+  //     review: "Designing components with Tailwind CSS is a game-changer.",
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "David Wilson",
+  //     role: "Backend Engineer",
+  //     image: "https://randomuser.me/api/portraits/men/32.jpg",
+  //     review: "Node.js and Express.js are the backbone of our scalable APIs.",
+  //   },
+  //   {
+  //     id: 6,
+  //     name: "Sophia Lee",
+  //     role: "Frontend Developer",
+  //     image: "https://randomuser.me/api/portraits/men/32.jpg",
+  //     review: "React Hooks make state management so much cleaner and easier!",
+  //   },
+  // ];
   // const handleBrandChange = (brand) => {
   //   setSelectedBrands((prev) =>
   //     prev.includes(brand) ? prev.filter((b) => b !== brand) : [...prev, brand]
@@ -157,7 +317,7 @@ const Home = () => {
         </div>
         {/* <HomeSecond /> */}
 
-        <div className="  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-4 p-4">
+        <div className="  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
           {filteredProducts.map((item) => (
             <ProductCard key={item._id} {...item} />
           ))}
@@ -167,11 +327,17 @@ const Home = () => {
       {/* Testimonial Section  */}
 
       <div className="py-10 bg-gray-100">
+        <h2 className="text-2xl font-semibold text-center mb-6">
+          TESTIMONIALS
+        </h2>
+
         <motion.div
-          className="flex space-x-6"
+          className=" overflow-hidden flex space-x-6"
+          // initial={{ x: 0 }}
           animate={{ x: ["0%", "-100%"] }}
-          transition={{ repeat: Infinity, duration: 15, ease: "linear" }}
+          transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
         >
+          {/* Duplicate the testimonials for smooth looping */}
           {testimonials &&
             testimonials.map((test) => (
               <Testimonial key={test.id} test={test} />
