@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaShoppingCart, FaUser, FaBars, FaTimes, FaBox } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCart } from "../redux/cartSlice";
+import { logout } from "../redux/Auth/authSlice";
 
 const Navbar = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -51,6 +52,8 @@ const Navbar = () => {
   // Logout Function
   const handleLogout = () => {
     localStorage.removeItem("token");
+    localStorage.removeItem("user");
+    dispatch(logout());
     setIsLoggedIn(false);
     navigate("/login");
   };
@@ -76,7 +79,7 @@ const Navbar = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               type="text"
-              className="border focus:outline-none p-1.5 m-1 w-[20rem] rounded-lg text-white"
+              className="border focus:outline-none p-2 m-1 w-[20rem] rounded-lg text-white"
               placeholder="Search a Product "
             />
             <button
@@ -208,7 +211,7 @@ const Navbar = () => {
                 </li>
                 <li>
                   <Link
-                    to="/profile"
+                    to="/user-profile"
                     className="flex items-center space-x-1"
                     onClick={() => setIsOpen(false)}
                   >

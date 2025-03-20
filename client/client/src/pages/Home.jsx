@@ -50,7 +50,9 @@ const Home = () => {
   const dispatch = useDispatch();
   const { user, isAuthenticated } = useSelector((state) => state.auth);
   // const user = localStorage.getItem("token");
-  console.log("user home", user, isAuthenticated);
+  // const user = localStorage.getItem("token");
+  // const user = localStorage.getItem("user");
+  // console.log("user home", user);
 
   const { product } = useSelector((state) => state.products);
   const [sortOption, setSortOption] = useState("");
@@ -64,6 +66,17 @@ const Home = () => {
   //   }
   // }, [dispatch, isAuthenticated]);
   useEffect(() => {
+    console.log("isAuthenticated:", isAuthenticated);
+    console.log("User data:", user);
+    const token = localStorage.getItem("token");
+    if (token) {
+      dispatch(fetchUser()); // Re-fetch user details on reload
+    }
+  }, [dispatch]);
+  useEffect(() => {
+    // if (isAuthenticated) {
+    //   dispatch(fetchUser());
+    // }
     dispatch(fetchAllProduct());
   }, [dispatch]);
 

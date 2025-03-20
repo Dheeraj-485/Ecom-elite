@@ -49,7 +49,7 @@ import axios from "axios";
 import { motion } from "framer-motion";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { loginUser } from "../redux/Auth/authSlice";
+import { loginUser, setUser } from "../redux/Auth/authSlice";
 
 const Login = () => {
   const {
@@ -87,9 +87,12 @@ const Login = () => {
       } else {
         localStorage.removeItem("email");
       }
+      console.log("Response login", response);
+
       toast.success(response.data.message);
       if (response?.payload) {
         localStorage.setItem("token", response.data.token);
+        dispatch(setUser(response.payload.user));
 
         navigate("/");
         console.log(response.data.token);

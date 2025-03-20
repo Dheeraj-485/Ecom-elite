@@ -103,7 +103,7 @@ const AdminOrders = () => {
       {loading ? (
         <p className="text-gray-700 text-lg">Loading orders...</p>
       ) : (
-        <div className="bg-white shadow-md rounded-lg overflow-hidden">
+        <div className="bg-white shadow-md rounded-lg overflow-auto  ">
           <table className="w-full border-collapse">
             <thead className="bg-gray-800 text-white">
               <tr>

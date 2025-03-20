@@ -171,7 +171,7 @@ const OrdersPage = () => {
                 className={`px-3 py-1 rounded-full text-sm font-medium ${
                   order.status === "Pending"
                     ? "bg-yellow-200 text-yellow-700"
-                    : order.status === "Completed"
+                    : order.status === "delivered"
                     ? "bg-green-200 text-green-700"
                     : "bg-red-200 text-red-700"
                 }`}

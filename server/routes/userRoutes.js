@@ -6,6 +6,7 @@ const {
   requestPassReset,
   resetPassword,
   checkUser,
+  changePassword,
 } = require("../controllers/User");
 const { isAuth } = require("../middlewares/checkAuth");
 const router = express.Router();
@@ -13,6 +14,7 @@ const router = express.Router();
 router
   .post("/signup", signupUser)
   .post("/login", loginUser)
+  .put("/update-password", isAuth, changePassword)
   .get("/verify-email/:token", verifyMail)
   .post("/request-reset", requestPassReset)
   .post("/password-reset/:token", resetPassword)

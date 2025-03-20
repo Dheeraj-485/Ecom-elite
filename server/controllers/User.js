@@ -160,6 +160,30 @@ exports.loginUser = async (req, res) => {
   }
 };
 
+//Change Password
+exports.changePassword = async (req, res) => {
+  try {
+    // const {id}=req.params;
+    const { password } = req.body;
+    const hashPass = await bcrypt.hash(password, 10);
+
+    const update = await User.findByIdAndUpdate(
+      req.user.id,
+      { password: hashPass },
+      {
+        new: true,
+      }
+    );
+    // await update.save();
+    return res.status(203).json({ message: "Password updated successfully" });
+  } catch (error) {
+    return res.status(500).json({
+      message: "Server Error - Error updating password",
+      error: error.message,
+    });
+  }
+};
+
 /**
  * @route   POST /request-reset
  * @desc    Send password reset link to user email
