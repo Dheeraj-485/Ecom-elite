@@ -84,19 +84,19 @@ const Home = () => {
         "This gaming laptop handles everything I throw at it. Super smooth gameplay!",
     },
     {
+      id: 6,
+      name: "David Wilson",
+      role: "Backend Engineer",
+      image: "https://randomuser.me/api/portraits/men/32.jpg",
+      review: "Node.js and Express.js are the backbone of our scalable APIs.",
+    },
+    {
       id: 5,
       name: "Sophia Miller",
       role: "Photographer",
       image: "https://randomuser.me/api/portraits/women/40.jpg",
       review:
         "The camera on this phone is a game changer! Professional-quality shots with ease.",
-    },
-    {
-      id: 6,
-      name: "David Wilson",
-      role: "Backend Engineer",
-      image: "https://randomuser.me/api/portraits/men/32.jpg",
-      review: "Node.js and Express.js are the backbone of our scalable APIs.",
     },
     {
       id: 7,
@@ -211,51 +211,6 @@ const Home = () => {
     },
   ];
 
-  // const testimonials = [
-  //   {
-  //     id: 1,
-  //     name: "John Doe",
-  //     role: "Software Engineer",
-  //     image: "https://randomuser.me/api/portraits/men/32.jpg",
-  //     review:
-  //       "React.js is an amazing library for building scalable applications!",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Sarah Smith",
-  //     role: "Product Manager",
-  //     image: "https://randomuser.me/api/portraits/men/32.jpg",
-  //     review: "Tailwind CSS makes styling so much faster and easier!",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Michael Brown",
-  //     role: "Full Stack Developer",
-  //     image: "https://randomuser.me/api/portraits/men/32.jpg",
-  //     review: "MERN stack is my go-to for modern web development.",
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Emma Johnson",
-  //     role: "UI/UX Designer",
-  //     image: "https://randomuser.me/api/portraits/men/32.jpg",
-  //     review: "Designing components with Tailwind CSS is a game-changer.",
-  //   },
-  //   {
-  //     id: 5,
-  //     name: "David Wilson",
-  //     role: "Backend Engineer",
-  //     image: "https://randomuser.me/api/portraits/men/32.jpg",
-  //     review: "Node.js and Express.js are the backbone of our scalable APIs.",
-  //   },
-  //   {
-  //     id: 6,
-  //     name: "Sophia Lee",
-  //     role: "Frontend Developer",
-  //     image: "https://randomuser.me/api/portraits/men/32.jpg",
-  //     review: "React Hooks make state management so much cleaner and easier!",
-  //   },
-  // ];
   // const handleBrandChange = (brand) => {
   //   setSelectedBrands((prev) =>
   //     prev.includes(brand) ? prev.filter((b) => b !== brand) : [...prev, brand]
@@ -333,11 +288,10 @@ const Home = () => {
 
         <motion.div
           className=" overflow-hidden flex space-x-6"
-          // initial={{ x: 0 }}
+          initial={{ x: 0 }}
           animate={{ x: ["0%", "-100%"] }}
-          transition={{ repeat: Infinity, duration: 30, ease: "linear" }}
+          transition={{ repeat: Infinity, duration: 90, ease: "linear" }}
         >
-          {/* Duplicate the testimonials for smooth looping */}
           {testimonials &&
             testimonials.map((test) => (
               <Testimonial key={test.id} test={test} />
