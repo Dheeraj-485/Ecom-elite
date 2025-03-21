@@ -83,8 +83,8 @@ const Navbar = () => {
               placeholder="Search a Product "
             />
             <button
-              // type="button"
-              className="border text-center p-2 m-2 bg-blue-50 rounded-lg
+              type="submit"
+              className="border text-center p-2 m-2 bg-blue-50 rounded-lg cursor-pointer
             "
             >
               🔍

@@ -43,7 +43,7 @@ export const fetchAllProduct = createAsyncThunk(
       const response = await axios.get(`${BASE_URL}/api/products`);
       console.log("response.data", response.data);
 
-      return response.data;
+      return response.data.products;
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }

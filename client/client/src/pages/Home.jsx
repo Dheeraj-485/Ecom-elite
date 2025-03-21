@@ -22,6 +22,8 @@ const Home = () => {
   // console.log("user home", user);
 
   const { product } = useSelector((state) => state.products);
+  console.log("Product ", product.products);
+
   const [sortOption, setSortOption] = useState("");
   const [selectedBrands, setSelectedBrands] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
@@ -50,6 +52,7 @@ const Home = () => {
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
   };
+
   const testimonials = [
     {
       id: 1,
@@ -83,6 +86,7 @@ const Home = () => {
       review:
         "This gaming laptop handles everything I throw at it. Super smooth gameplay!",
     },
+
     {
       id: 6,
       name: "David Wilson",
@@ -273,7 +277,7 @@ const Home = () => {
         {/* <HomeSecond /> */}
 
         <div className="  grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
-          {filteredProducts.map((item) => (
+          {filteredProducts?.map((item) => (
             <ProductCard key={item._id} {...item} />
           ))}
         </div>

@@ -20,7 +20,7 @@ export const ProductCard = ({ _id, title, description, price, thumbnail }) => {
       <div className="relative m-10 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
         <Link
           className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
-          to={`products/${_id}`}
+          to={`/${_id}`}
         >
           <img
             className="object-cover"
@@ -32,7 +32,7 @@ export const ProductCard = ({ _id, title, description, price, thumbnail }) => {
           </span>
         </Link>
         <div className="mt-4 px-5 pb-5">
-          <Link to={`products/${_id}`}>
+          <Link to={`/${_id}`}>
             <h5 className="text-xl tracking-tight text-slate-900">{title}</h5>
           </Link>
           <div className="mt-2 mb-5 flex items-center justify-between">
@@ -114,14 +114,19 @@ export const ProductCard = ({ _id, title, description, price, thumbnail }) => {
             Add to cart
           </a>
           {}{" "}
-          <div className="justify-around mx-auto flex ">
-            <button className="bg-blue-400 p-2 m-2 rounded-lg text-white hover:bg-blue-500 text-xl">
-              Edit
-            </button>
-            <button className="bg-red-400 p-2 m-2 rounded-lg text-white hover:bg-red-500 text-xl">
-              Delete
-            </button>
-          </div>
+          {user?.role === "admin" && (
+            <div className="justify-around mx-auto flex ">
+              <Link>
+                {" "}
+                <button className="bg-blue-400 p-2 m-2 rounded-lg text-white hover:bg-blue-500 text-xl">
+                  Edit
+                </button>
+              </Link>
+              <button className="bg-red-400 p-2 m-2 rounded-lg text-white hover:bg-red-500 text-xl">
+                Delete
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>
