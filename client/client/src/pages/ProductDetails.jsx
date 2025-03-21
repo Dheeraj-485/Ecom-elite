@@ -85,7 +85,7 @@ const ProductDetails = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {/* Animated Product Image */}
         <motion.img
-          src={product.thumbnail.url}
+          src={product.thumbnail?.url}
           alt={product.title}
           className="w-full h-80 object-cover rounded-lg shadow-md"
           initial={{ scale: 0.8 }}

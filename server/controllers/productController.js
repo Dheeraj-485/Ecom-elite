@@ -97,6 +97,11 @@ exports.createProduct = async (req, res) => {
 //get all products with filters
 exports.getProducts = async (req, res) => {
   try {
+    let { limit, page } = req.query;
+    page = parseInt(page) || 1; //Default to page 1
+    limit = parseInt(limit) || 10; //Default limit 10 items per page
+    const skip = (page - 1) * limit;
+
     const query = {};
     if (req.query.category) {
       query.category = req.query.category;
@@ -104,8 +109,15 @@ exports.getProducts = async (req, res) => {
     if (req.query.brand) {
       query.brand = req.query.brand;
     }
-    const products = await Products.find(query).sort({ createdAt: -1 });
-    return res.json(products);
+    const products = await Products.find(query)
+      .skip(skip)
+      .limit(limit)
+      .sort({ createdAt: -1 });
+    // return res.json(products);
+    const totalProducts = await Products.countDocuments();
+    const totalPages = Math.ceil(totalProducts / limit);
+
+    res.json({ products, totalPages, currentPage: page });
   } catch (error) {
     return res.status(500).json({
       message: "Error finding products by sort:",

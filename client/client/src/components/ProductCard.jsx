@@ -1,9 +1,22 @@
 import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import { fetchUser } from "../redux/Auth/authSlice";
 
 export const ProductCard = ({ _id, title, description, price, thumbnail }) => {
+  const { user, isAuthenticated } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    // console.log("isAuthenticated:", isAuthenticated);
+    // console.log("User data:", user);
+    const token = localStorage.getItem("token");
+    if (token) {
+      dispatch(fetchUser()); // Re-fetch user details on reload
+    }
+  }, [dispatch]);
   return (
-    <div className="   hover:border-gray-200 transition duration-500 ease-in-out transform hover:-translate-y-1 hover:scale-110">
+    <div className="   hover:border-gray-200 transition duration-100 ease-in-out transform hover:-translate-y-0.5 hover:scale-110">
       <div className="relative m-10 flex w-full max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md">
         <Link
           className="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
@@ -11,7 +24,7 @@ export const ProductCard = ({ _id, title, description, price, thumbnail }) => {
         >
           <img
             className="object-cover"
-            src={thumbnail.url}
+            src={thumbnail?.url}
             alt="product image"
           />
           <span className="absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white">
@@ -100,6 +113,15 @@ export const ProductCard = ({ _id, title, description, price, thumbnail }) => {
             </svg>
             Add to cart
           </a>
+          {}{" "}
+          <div className="justify-around mx-auto flex ">
+            <button className="bg-blue-400 p-2 m-2 rounded-lg text-white hover:bg-blue-500 text-xl">
+              Edit
+            </button>
+            <button className="bg-red-400 p-2 m-2 rounded-lg text-white hover:bg-red-500 text-xl">
+              Delete
+            </button>
+          </div>
         </div>
       </div>
     </div>
