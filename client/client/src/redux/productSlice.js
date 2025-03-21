@@ -8,6 +8,8 @@ const initialState = {
   error: null,
   product: [],
   reviews: [],
+  totalPages: 1,
+  currentPage: 1,
   selectedProduct: null,
 };
 
@@ -38,12 +40,14 @@ export const createProduct = createAsyncThunk(
 
 export const fetchAllProduct = createAsyncThunk(
   "product/fetchAll",
-  async () => {
+  async ({ page, limit }) => {
     try {
-      const response = await axios.get(`${BASE_URL}/api/products`);
-      console.log("response.data", response.data);
+      const response = await axios.get(
+        `${BASE_URL}/api/products/?page=${page}&limit=${limit}`
+      );
+      console.log("response.data products", response.data);
 
-      return response.data.products;
+      return response.data;
     } catch (error) {
       toast.error(error?.response?.data?.message);
     }
@@ -106,8 +110,11 @@ const productSlice = createSlice({
       })
       .addCase(fetchAllProduct.fulfilled, (state, action) => {
         state.loading = false;
-        state.product = action.payload;
-        console.log("action", action.payload);
+        console.log("action fetch", action.payload);
+        // state.product = action.payload;
+        state.product = action.payload.products;
+        state.totalPages = action.payload.totalPages;
+        state.totalPages = action.payload.totalPages;
       })
       .addCase(fetchAllProduct.rejected, (state, action) => {
         state.loading = false;

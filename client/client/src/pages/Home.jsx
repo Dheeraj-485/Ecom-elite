@@ -21,8 +21,10 @@ const Home = () => {
   // const user = localStorage.getItem("user");
   // console.log("user home", user);
 
-  const { product } = useSelector((state) => state.products);
-  console.log("Product ", product.products);
+  const { product, currentPage, totalPages } = useSelector(
+    (state) => state.products
+  );
+  console.log("Product home", product, currentPage, totalPages);
 
   const [sortOption, setSortOption] = useState("");
   const [selectedBrands, setSelectedBrands] = useState([]);
@@ -46,8 +48,11 @@ const Home = () => {
     // if (isAuthenticated) {
     //   dispatch(fetchUser());
     // }
-    dispatch(fetchAllProduct());
-  }, [dispatch]);
+    const fetch = async () => {
+      await dispatch(fetchAllProduct({ page: currentPage, limit: 10 }));
+    };
+    fetch();
+  }, [dispatch, currentPage]);
 
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
@@ -280,6 +285,29 @@ const Home = () => {
           {filteredProducts?.map((item) => (
             <ProductCard key={item._id} {...item} />
           ))}
+        </div>
+
+        {/* Pagination Controls */}
+        <div className="mt-4 flex justify-center">
+          <button
+            type="button"
+            disabled={currentPage === 1}
+            onClick={() =>
+              dispatch(fetchAllProduct({ page: currentPage - 1, limit: 10 }))
+            }
+          >
+            Prev
+          </button>
+          <span className="mx-4">{`Page ${currentPage} of ${totalPages}`}</span>
+          <button
+            type="button"
+            disabled={currentPage === totalPages}
+            onClick={() =>
+              dispatch(fetchAllProduct({ page: currentPage + 1, limit: 10 }))
+            }
+          >
+            Next
+          </button>
         </div>
       </div>
 
