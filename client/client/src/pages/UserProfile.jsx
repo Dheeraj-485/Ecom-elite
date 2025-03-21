@@ -4,8 +4,7 @@ import { fetchUser, changePassword } from "../redux/Auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import AdminOrders from "./AdminOrders";
 import { useState } from "react";
-// import { useHistory } from "react";
-// import { updatePassword } from "../redux/Auth/authSlice";
+
 
 const UserProfile = () => {
   const dispatch = useDispatch();
