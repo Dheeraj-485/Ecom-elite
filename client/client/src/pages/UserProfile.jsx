@@ -4,7 +4,7 @@ import { fetchUser, changePassword } from "../redux/Auth/authSlice";
 import { useNavigate } from "react-router-dom";
 import AdminOrders from "./AdminOrders";
 import { useState } from "react";
-
+import { BeatLoader } from "react-spinners";
 
 const UserProfile = () => {
   const dispatch = useDispatch();
@@ -60,6 +60,14 @@ const UserProfile = () => {
 
     // console.log(changePassword(updatePassword));s
   };
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <BeatLoader color="#3B82F6" />
+      </div>
+    );
+  }
 
   return (
     <>

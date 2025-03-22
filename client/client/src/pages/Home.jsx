@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { ProductCard } from "../components/ProductCard";
 import { fetchAllProduct } from "../redux/productSlice";
 import { Link } from "react-router-dom";
+import { BeatLoader } from "react-spinners";
 import { Carousel } from "react-responsive-carousel";
 import Image1 from "/Images/Img1.jpg";
 import Image2 from "/Images/Img2.jpg";
@@ -21,10 +22,10 @@ const Home = () => {
   // const user = localStorage.getItem("user");
   // console.log("user home", user);
 
-  const { product, currentPage, totalPages } = useSelector(
+  const { loading, product, currentPage, totalPages } = useSelector(
     (state) => state.products
   );
-  console.log("Product home", product, currentPage, totalPages);
+  // console.log("", product, currentPage, totalPages);
 
   const [sortOption, setSortOption] = useState("");
   const [selectedBrands, setSelectedBrands] = useState([]);
@@ -52,7 +53,7 @@ const Home = () => {
       await dispatch(fetchAllProduct({ page: currentPage, limit: 10 }));
     };
     fetch();
-  }, [dispatch, currentPage]);
+  }, [dispatch, currentPage, totalPages]);
 
   const handleSortChange = (e) => {
     setSortOption(e.target.value);
@@ -250,6 +251,14 @@ const Home = () => {
       (selectedCategories.length === 0 ||
         selectedCategories.includes(product.category))
   );
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-screen">
+        <BeatLoader color="#3B82F6" />
+      </div>
+    );
+  }
 
   return (
     <div className="  w-full  flex-col items-center">

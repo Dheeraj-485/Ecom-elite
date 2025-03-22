@@ -21,6 +21,7 @@ const CartItem = ({ item }) => {
           onClick={() =>
             dispatch(updateCart({ productId: item.product._id, quantity: -1 }))
           }
+          disabled={item.quantity == 1}
           className="bg-gray-200 px-3 py-1 rounded-l"
         >
           -

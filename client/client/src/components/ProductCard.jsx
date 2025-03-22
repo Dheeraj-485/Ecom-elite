@@ -116,7 +116,7 @@ export const ProductCard = ({ _id, title, description, price, thumbnail }) => {
           {}{" "}
           {user?.role === "admin" && (
             <div className="justify-around mx-auto flex ">
-              <Link>
+              <Link to={`/edit-product/${_id}`}>
                 {" "}
                 <button className="bg-blue-400 p-2 m-2 rounded-lg text-white hover:bg-blue-500 text-xl">
                   Edit

@@ -57,7 +57,7 @@ export const fetchUser = createAsyncThunk("user/fetch", async (req, res) => {
     const response = await axios.get(`${BASE_URL}/api/auth/me`, {
       headers: { Authorization: `Bearer ${token}` },
     });
-    console.log("fetch response user", response);
+    // console.log("fetch response user", response);
 
     // toast.success(response.data.message);
     return response.data;

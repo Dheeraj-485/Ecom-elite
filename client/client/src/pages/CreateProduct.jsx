@@ -1,19 +1,55 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { useDispatch } from "react-redux";
 import { useForm } from "react-hook-form";
-import { createProduct } from "../redux/productSlice";
+import {
+  createProduct,
+  fetchProductById,
+  updateProduct,
+} from "../redux/productSlice";
+import { useParams } from "react-router-dom";
 
 const CreateProduct = () => {
   const dispatch = useDispatch();
-  const [image, setImage] = useState();
+  const [image, setImage] = useState("");
   const [imagePreview, setImagePreview] = useState("");
 
+  const params = useParams();
+  // console.log("Edit product", params.id);
+  // const [loading, setLoading] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
   } = useForm();
+
+  useEffect(() => {
+    const fetchProd = async () => {
+      if (params.id) {
+        const { payload } = await dispatch(fetchProductById(params.id));
+        console.log("product payload ---------------------------", payload);
+        if (payload) {
+          setValue("title", payload.title);
+          setValue("description", payload.description);
+          setValue("price", payload.price);
+          setValue("category", payload.category);
+          setValue("brand", payload.brand);
+          setValue("stock", payload.stock);
+          // Set the existing image preview
+          setValue("thumbnail", payload?.thumbnail);
+          setValue("thumbnail", payload?.thumbnail);
+          setImage(payload?.thumbnail);
+          setImagePreview(payload?.thumbnail);
+          console.log("response edit", payload);
+        }
+      }
+    };
+
+    fetchProd();
+  }, [params.id, setValue, dispatch]);
+  // console.log("===========form data ==============",)
 
   const handleImageChange = (e) => {
     const file = e.target.files[0];
@@ -26,7 +62,9 @@ const CreateProduct = () => {
   };
   // console.log(image, handleImageChange);
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
+    // setLoading(true);
+    setIsSubmitting(true);
     const formData = new FormData();
     formData.append("title", data.title);
     formData.append("description", data.description);
@@ -36,8 +74,22 @@ const CreateProduct = () => {
     formData.append("stock", data.stock);
     if (image) {
       formData.append("thumbnail", image); // Append actual image file
+    } else {
+      formData.append("existingThumbnail", imagePreview); // Preserve existing image URL
     }
-    dispatch(createProduct(formData));
+
+    console.log("FormData content:", [...formData]); // Debugging
+    try {
+      if (params.id) {
+        await dispatch(updateProduct({ id: params.id, updatedData: formData }));
+      } else {
+        await dispatch(createProduct(formData));
+      }
+    } catch (error) {
+      console.error("Error updating/creating product:", error);
+    } finally {
+      setIsSubmitting(false);
+    }
   };
   return (
     <div className="  p-4 flex items-center justify-center min-h-screen bg-gray-100">
@@ -134,8 +186,9 @@ const CreateProduct = () => {
             <input
               className="border border-gray-300 p-2  rounded-lg   "
               type="file"
-              {...register("thumbnail", { required: "Image is required" })}
-              name="image"
+              // {...register("thumbnail", { required: "Image is required" })}
+              // name="thumbnail"
+              // value={image}
               accept="image/*"
               onChange={handleImageChange}
               placeholder="Enter Product Image"
@@ -152,9 +205,30 @@ const CreateProduct = () => {
                 className="mt-2 w-32 h-32 object-cover rounded-lg"
               />
             )}
+            {errors.imagePreview && (
+              <p className="text-red-500 text-sm">
+                {errors.imagePreview.message}
+              </p>
+            )}
           </div>
-          <button className="w-full bg-green-300 p-2 font-semibold m-2 text-xl">
-            Create
+          {/* <button
+            type="submit"
+            // type=""
+            disabled={loading ? true : false}
+            className="w-full bg-green-300 p-2 font-semibold m-2 text-xl cursor-pointer"
+          >
+            {params.id ? "Update" : "Create"}
+          </button> */}
+
+          <button
+            type="submit"
+            disabled={isSubmitting ? true : false}
+            className={`w-full p-2 font-semibold m-2 text-xl cursor-pointer ${
+              isSubmitting ? "bg-gray-300" : "bg-green-500 hover:bg-green-600"
+            }`}
+          >
+            {isSubmitting ? "Processing..." : params.id ? "Update" : "Create"}
+            {/* {isSubmitting ? "Processing..." : "Update"} */}
           </button>
         </form>
       </div>

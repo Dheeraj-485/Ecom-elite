@@ -13,7 +13,7 @@ const Cart = () => {
   }, [dispatch]);
 
   return (
-    <div className="container mx-auto p-6">
+    <div className="container mx-auto p-6 flex flex-col flex-1 min-h-[80vh] ">
       <h2 className="text-2xl font-semi-bold mb-4">Your Cart</h2>
 
       {cart && cart?.items?.length > 0 ? (

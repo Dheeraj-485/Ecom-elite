@@ -16,6 +16,11 @@ const Navbar = () => {
   const navigate = useNavigate();
 
   const user = useSelector((state) => state.auth.user);
+  const { cart } = useSelector((state) => state.cart);
+  console.log("Cart nav", cart);
+
+  // const CartDis = dispatch(fetchCart());
+  // console.log("Cart dis", CartDis);
 
   // Check if user is logged in
   useEffect(() => {

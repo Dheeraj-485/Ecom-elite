@@ -64,6 +64,31 @@ export const fetchProductById = createAsyncThunk("products/id", async (id) => {
     toast.error(error?.response?.data?.message);
   }
 });
+export const updateProduct = createAsyncThunk(
+  "product/update",
+  async ({ id, updatedData }) => {
+    try {
+      const token = localStorage.getItem("token");
+      const response = await axios.put(
+        `${BASE_URL}/api/products/update/${id}`,
+        updatedData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log("Update api", response);
+
+      toast.success(response?.data?.message);
+      return response.data;
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  }
+);
 
 export const deleteProduct = createAsyncThunk("product/delete", async (id) => {
   try {
@@ -106,15 +131,15 @@ const productSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(fetchAllProduct.pending, (state) => {
-        (state.loading = true), (state.error = null);
+        state.loading = true;
       })
       .addCase(fetchAllProduct.fulfilled, (state, action) => {
         state.loading = false;
-        console.log("action fetch", action.payload);
+        console.log("action fetch", action?.payload);
         // state.product = action.payload;
-        state.product = action.payload.products;
-        state.totalPages = action.payload.totalPages;
-        state.totalPages = action.payload.totalPages;
+        state.product = action?.payload?.products;
+        state.totalPages = action.payload?.totalPages;
+        state.totalPages = action.payload?.totalPages;
       })
       .addCase(fetchAllProduct.rejected, (state, action) => {
         state.loading = false;
@@ -125,8 +150,8 @@ const productSlice = createSlice({
       })
       .addCase(fetchProductById.fulfilled, (state, action) => {
         state.loading = false;
-        state.selectedProduct = action.payload;
-        console.log("selected product:", action.payload);
+        state.selectedProduct = action?.payload;
+        console.log("selected product:", action?.payload);
       })
       .addCase(fetchProductById.rejected, (state, action) => {
         state.loading = false;
@@ -141,6 +166,19 @@ const productSlice = createSlice({
         state.product.push(action.payload);
       })
       .addCase(createProduct.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      })
+      .addCase(updateProduct.pending, (state) => {
+        state.loading = true;
+      })
+      .addCase(updateProduct.fulfilled, (state, action) => {
+        state.loading = false;
+        console.log("update action", action.payload);
+
+        state.selectedProduct = action.payload;
+      })
+      .addCase(updateProduct.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
