@@ -33,7 +33,10 @@ export const ProductCard = ({ _id, title, description, price, thumbnail }) => {
         </Link>
         <div className="mt-4 px-5 pb-5">
           <Link to={`/${_id}`}>
-            <h5 className="text-xl tracking-tight text-slate-900">{title}</h5>
+            <h5 className="text-xl tracking-tight text-slate-900">
+              {/* {title.slice(0, 10)} */}
+              {title.length > 10 ? `${title.slice(0, 10)}...` : title}
+            </h5>
           </Link>
           <div className="mt-2 mb-5 flex items-center justify-between">
             <p>

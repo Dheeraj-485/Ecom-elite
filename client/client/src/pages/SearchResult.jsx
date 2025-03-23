@@ -48,7 +48,7 @@ const SearchResult = () => {
         <p>No products found for "{searchQuery}". Try a different search!</p>
       )}
 
-      <div className="flex flex-wrap justify-items-center">
+      <div className="flex flex-wrap justify-center items-center">
         {products.map((item) => (
           //   <div key={blog._id} className="col-md-4">
           //     <div className="card mb-3">

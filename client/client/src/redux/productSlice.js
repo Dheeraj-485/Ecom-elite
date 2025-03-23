@@ -138,7 +138,7 @@ const productSlice = createSlice({
         console.log("action fetch", action?.payload);
         // state.product = action.payload;
         state.product = action?.payload?.products;
-        state.totalPages = action.payload?.totalPages;
+        state.currentPage = action.payload?.currentPage;
         state.totalPages = action.payload?.totalPages;
       })
       .addCase(fetchAllProduct.rejected, (state, action) => {
