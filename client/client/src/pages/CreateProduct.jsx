@@ -38,10 +38,11 @@ const CreateProduct = () => {
           setValue("brand", payload.brand);
           setValue("stock", payload.stock);
           // Set the existing image preview
-          setValue("thumbnail", payload?.thumbnail);
-          setValue("thumbnail", payload?.thumbnail);
-          setImage(payload?.thumbnail);
-          setImagePreview(payload?.thumbnail);
+          setValue("thumbnail", payload?.thumbnail?.url);
+          // setValue("thumbnail", payload?.thumbnail);
+          // setImage(payload?.thumbnail?.url);
+          setImagePreview(payload?.thumbnail?.url);
+          // setValue("thumbnail", imagePreview?.thumbnail?.url);
           console.log("response edit", payload);
         }
       }
@@ -74,8 +75,6 @@ const CreateProduct = () => {
     formData.append("stock", data.stock);
     if (image) {
       formData.append("thumbnail", image); // Append actual image file
-    } else {
-      formData.append("existingThumbnail", imagePreview); // Preserve existing image URL
     }
 
     console.log("FormData content:", [...formData]); // Debugging

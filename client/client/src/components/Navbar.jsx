@@ -17,7 +17,7 @@ const Navbar = () => {
 
   const user = useSelector((state) => state.auth.user);
   const { cart } = useSelector((state) => state.cart);
-  console.log("Cart nav", cart);
+  // console.log("Cart nav", cart);
 
   // const CartDis = dispatch(fetchCart());
   // console.log("Cart dis", CartDis);
