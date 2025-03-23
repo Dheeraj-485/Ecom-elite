@@ -235,15 +235,17 @@ const Home = () => {
   //   );
   // };
 
-  const sortedProducts = [...product].sort((a, b) => {
-    if (sortOption === "lowToHigh") {
-      return a.price - b.price;
-    } else if (sortOption === "highToLow") {
-      return b.price - a.price;
-    } else {
-      return 0;
-    }
-  });
+  const sortedProducts =
+    // [...product] &&
+    [...product]?.sort((a, b) => {
+      if (sortOption === "lowToHigh") {
+        return a.price - b.price;
+      } else if (sortOption === "highToLow") {
+        return b.price - a.price;
+      } else {
+        return 0;
+      }
+    });
 
   const filteredProducts = sortedProducts.filter(
     (product) =>
